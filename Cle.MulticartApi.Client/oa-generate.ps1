@@ -1,0 +1,1 @@
+ nswag run .\openapi\oa-config.nswag
