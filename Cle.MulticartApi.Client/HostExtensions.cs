@@ -6,6 +6,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace Cle.MulticartApi.Client
 {
+    /// <summary>
+    /// IHolt configuration extension method's
+    /// </summary>
     public static class HostExtensions
     {
         /// <summary>

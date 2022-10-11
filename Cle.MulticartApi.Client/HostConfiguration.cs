@@ -7,13 +7,23 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Cle.MulticartApi.Client
 {
+    /// <summary>
+    /// HostConfiguration options
+    /// </summary>
     public class HostConfiguration
     {
         private readonly IServiceCollection services;
 
         internal bool HttpClientsAdded { get; private set; }
+        /// <summary>
+        /// Client base uri
+        /// </summary>
         public Uri? BaseUrl { get; set; }
 
+        /// <summary>
+        /// HostConfiguration
+        /// </summary>
+        /// <param name="services"></param>
         public HostConfiguration(IServiceCollection services)
         {
             this.services = services;
