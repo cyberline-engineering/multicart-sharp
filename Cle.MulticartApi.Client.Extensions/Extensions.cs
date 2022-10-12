@@ -5,8 +5,21 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Cle.MulticartApi.Client.Extensions
 {
+    /// <summary>
+    /// MulticartApi Client Extensions
+    /// </summary>
     public static class Extensions
     {
+        /// <summary>
+        /// Init MulticartApiClient for service-to-service communication using OAuth Client Credential Grant
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="identityResourceConfigSection"></param>
+        /// <param name="options"></param>
+        /// <param name="client"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
         public static IServiceCollection AddMulticartClientForService(this IServiceCollection services,
             IConfiguration configuration, IConfiguration? identityResourceConfigSection = default,
             Action<HostConfiguration>? options = default, Action<HttpClient, HostConfiguration>? client = default,
@@ -18,6 +31,15 @@ namespace Cle.MulticartApi.Client.Extensions
                 ;
         }
 
+        /// <summary>
+        /// Init MulticartApiClient for customer-to-service communication using OAuth Access Token from HttpContext
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="configuration"></param>
+        /// <param name="options"></param>
+        /// <param name="client"></param>
+        /// <param name="builder"></param>
+        /// <returns></returns>
         public static IServiceCollection AddMulticartClientForUser(this IServiceCollection services,
             IConfiguration configuration, Action<HostConfiguration>? options = default,
             Action<HttpClient, HostConfiguration>? client = default,
