@@ -8,7 +8,7 @@
 	<PropertyGroup>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<AssemblyName>Cle.MulticartApi.Client</AssemblyName>
-		<PackageId>Cle.MulticartApi.Client</PackageId>
+		<PackageId>Multicartshop.Client</PackageId>
 		<OutputType>Library</OutputType>
 		<AssemblyTitle>Multicartshop API C# client</AssemblyTitle>
 		<RootNamespace>Cle.MulticartApi.Client</RootNamespace>

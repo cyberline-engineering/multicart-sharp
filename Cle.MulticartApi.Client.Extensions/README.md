@@ -1,9 +1,9 @@
 ﻿# Cle.MulticartApi.Client.Extensions: A .net library extensions for Multicartshop&copy; API Client
-[![NuGet](https://img.shields.io/nuget/v/Cle.MulticartApi.Client.Extensions.svg?maxAge=3600)](https://www.nuget.org/packages/Cle.MulticartApi.Client.Extensions/)
+[![NuGet](https://img.shields.io/nuget/v/Multicartshop.Client.Extensions.svg?maxAge=3600)](https://www.nuget.org/packages/Multicartshop.Client.Extensions/)
 
 # 1. Installation
 
-Cle.MulticartApi.Client.Extensions is [available on NuGet](https://www.nuget.org/packages/Cle.MulticartApi.Client.Extensions/). Use the package manager
+Cle.MulticartApi.Client.Extensions is [available on NuGet](https://www.nuget.org/packages/Multicartshop.Client.Extensions/). Use the package manager
 console in Visual Studio to install it:
 
 ```pwsh

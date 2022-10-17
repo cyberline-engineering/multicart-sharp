@@ -12,7 +12,7 @@
 		<PackageId>Cle.MulticartApi.Client.Extensions</PackageId>
 		<OutputType>Library</OutputType>
 		<AssemblyTitle>Multicartshop API C# client extensions</AssemblyTitle>
-		<RootNamespace>Cle.MulticartApi.Client.Extensions</RootNamespace>
+		<RootNamespace>Multicartshop.Client.Extensions</RootNamespace>
 		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Cle.MulticartApi.Client.Extensions.xml</DocumentationFile>
 		<RepositoryUrl>https://github.com/cyberline-engineering/multicart-sharp.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
