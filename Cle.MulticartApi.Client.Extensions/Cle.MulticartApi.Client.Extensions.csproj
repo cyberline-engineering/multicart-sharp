@@ -9,7 +9,7 @@
 	<PropertyGroup>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 		<AssemblyName>Cle.MulticartApi.Client.Extensions</AssemblyName>
-		<PackageId>Cle.MulticartApi.Client.Extensions</PackageId>
+		<PackageId>Multicartshop.Client.Extensions</PackageId>
 		<OutputType>Library</OutputType>
 		<AssemblyTitle>Multicartshop API C# client extensions</AssemblyTitle>
 		<RootNamespace>Multicartshop.Client.Extensions</RootNamespace>
@@ -17,7 +17,7 @@
 		<RepositoryUrl>https://github.com/cyberline-engineering/multicart-sharp.git</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
 		<PackageReleaseNotes></PackageReleaseNotes>
-		<VersionPrefix>0.1.0</VersionPrefix>
+		<VersionPrefix>0.2.0</VersionPrefix>
 		<EmbedAllSources>true</EmbedAllSources>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
@@ -33,10 +33,6 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Cle.Identity.Extensions" Version="0.1.23" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Cle.MulticartApi.Client\Cle.MulticartApi.Client.csproj" />
   </ItemGroup>
 
@@ -45,6 +41,10 @@
 			<Pack>True</Pack>
 			<PackagePath>\</PackagePath>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Cybering.Identity.Extensions" Version="0.3.0" />
 	</ItemGroup>
 
 </Project>
