@@ -75,6 +75,18 @@ namespace Cle.MulticartApi.Client.Types
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
+        /// Get cart item by id with sync
+        /// </summary>
+        /// <remarks>
+        /// Retrieves cart item by unique id with sync
+        /// </remarks>
+        /// <param name="id">Id of cart item</param>
+        /// <returns>Synced cart item</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<CartItemSync>> SyncAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
         /// Get cart items for user (paged)
         /// </summary>
         /// <remarks>
@@ -83,12 +95,13 @@ namespace Cle.MulticartApi.Client.Types
         /// <param name="platform">Platform type</param>
         /// <param name="seller">Seller</param>
         /// <param name="usItemId">Unique for seller product id</param>
+        /// <param name="userId">User id</param>
         /// <param name="pageSize">Page size (from 1 to 50, default 20)</param>
         /// <param name="dir">Direction of paging</param>
         /// <param name="pageToken">Current position token (from previous page response)</param>
         /// <returns>Returns cart items list</returns>
         /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse<CartItemPagingResponse>> CartItemGetAsync(EnPlatformType? platform = null, string? seller = null, string? usItemId = null, int? pageSize = null, EnPageDirection? dir = null, string? pageToken = null, System.Collections.Generic.IEnumerable<string>? includedProperties = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MulticartClientResponse<CartItemPagingResponse>> CartItemGetAsync(EnPlatformType? platform = null, string? seller = null, string? usItemId = null, string? userId = null, int? pageSize = null, EnPageDirection? dir = null, string? pageToken = null, System.Collections.Generic.IEnumerable<string>? includedProperties = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -101,84 +114,6 @@ namespace Cle.MulticartApi.Client.Types
         /// <returns>Returns the newly created cart item id</returns>
         /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<MulticartClientResponse<ResultGuid>> CartItemPostAsync(CartItemBody input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial interface IOfferClient
-    {
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Get offer by id
-        /// </summary>
-        /// <remarks>
-        /// Retrieves offer by unique id
-        /// </remarks>
-        /// <param name="id">Id of the offer</param>
-        /// <returns>Returns offer</returns>
-        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse<OfferGet>> OfferGetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Update offer
-        /// </summary>
-        /// <remarks>
-        /// Update offer by id (all fields will be changed)
-        /// </remarks>
-        /// <param name="id">Offer id for update</param>
-        /// <param name="input">Offer data</param>
-        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse> OfferPutAsync(System.Guid id, OfferPost input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Patch offer
-        /// </summary>
-        /// <remarks>
-        /// Patch offer by id (only the fields provided in the request will be changed)
-        /// </remarks>
-        /// <param name="id">Offer id for patch</param>
-        /// <param name="input">Offer data</param>
-        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse> OfferPatchAsync(System.Guid id, OfferPatch input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Delete offer
-        /// </summary>
-        /// <remarks>
-        /// Delete offer with id
-        /// </remarks>
-        /// <param name="id">Offer id to delete</param>
-        /// <returns>Ok. No returns</returns>
-        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse> OfferDeleteAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Get offers for user (paged)
-        /// </summary>
-        /// <remarks>
-        /// Retrieves offers by pages applying filters (name or group id)
-        /// </remarks>
-        /// <param name="name">Offer name</param>
-        /// <param name="groupId">Offer group id</param>
-        /// <param name="pageSize">Page size (from 1 to 50, default 20)</param>
-        /// <param name="dir">Direction of paging</param>
-        /// <param name="pageToken">Current position token (from previous page response)</param>
-        /// <returns>Returns offers list</returns>
-        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse<OfferPagingResponse>> OfferGetAsync(string? name = null, System.Guid? groupId = null, int? pageSize = null, EnPageDirection? dir = null, string? pageToken = null, System.Collections.Generic.IEnumerable<string>? includedProperties = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
-
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        /// <summary>
-        /// Create new offer
-        /// </summary>
-        /// <param name="input">Offer to add</param>
-        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse> OfferPostAsync(OfferPost input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -243,16 +178,16 @@ namespace Cle.MulticartApi.Client.Types
         /// <remarks>
         /// Retrieves cart items by pages applying filter (platform, seller, usItemId)
         /// </remarks>
-        /// <param name="userId">Multicart owner user id</param>
         /// <param name="platform">Platform type</param>
         /// <param name="seller">Seller</param>
         /// <param name="usItemId">Unique for seller product id</param>
+        /// <param name="userId">User id</param>
         /// <param name="pageSize">Page size (from 1 to 50, default 20)</param>
         /// <param name="dir">Direction of paging</param>
         /// <param name="pageToken">Current position token (from previous page response)</param>
         /// <returns>Returns cart items list</returns>
         /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
-        System.Threading.Tasks.Task<MulticartClientResponse<CartItemPagingResponse>> CartItemGetAsync(string? userId = null, EnPlatformType? platform = null, string? seller = null, string? usItemId = null, int? pageSize = null, EnPageDirection? dir = null, string? pageToken = null, System.Collections.Generic.IEnumerable<string>? includedProperties = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+        System.Threading.Tasks.Task<MulticartClientResponse<CartItemPagingResponse>> CartItemGetAsync(EnPlatformType? platform = null, string? seller = null, string? usItemId = null, string? userId = null, int? pageSize = null, EnPageDirection? dir = null, string? pageToken = null, System.Collections.Generic.IEnumerable<string>? includedProperties = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <summary>
@@ -265,6 +200,141 @@ namespace Cle.MulticartApi.Client.Types
         /// <returns>Returns the newly created cart item id</returns>
         /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
         System.Threading.Tasks.Task<MulticartClientResponse<ResultGuid>> CartItemPostAsync(CartItemBodyAdmin input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial interface IOfferClient
+    {
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get offer by id
+        /// </summary>
+        /// <remarks>
+        /// Retrieves offer by unique id
+        /// </remarks>
+        /// <param name="id">Id of the offer</param>
+        /// <returns>Returns offer</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<OfferGet>> OfferGetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Update offer
+        /// </summary>
+        /// <remarks>
+        /// Update offer by id (all fields will be changed)
+        /// </remarks>
+        /// <param name="id">Offer id for update</param>
+        /// <param name="input">Offer data</param>
+        /// <returns>Ok. No returns</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse> OfferPutAsync(System.Guid id, OfferPost input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Patch offer
+        /// </summary>
+        /// <remarks>
+        /// Patch offer by id (only the fields provided in the request will be changed)
+        /// </remarks>
+        /// <param name="id">Offer id for patch</param>
+        /// <param name="input">Offer data</param>
+        /// <returns>Ok. No returns</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse> OfferPatchAsync(System.Guid id, OfferPatch input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Delete offer
+        /// </summary>
+        /// <remarks>
+        /// Delete offer with id
+        /// </remarks>
+        /// <param name="id">Offer id to delete</param>
+        /// <returns>Ok. No returns</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse> OfferDeleteAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get offer by link
+        /// </summary>
+        /// <remarks>
+        /// Retrieves offer by unique link
+        /// </remarks>
+        /// <returns>Returns offer</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<OfferGet>> LinkAsync(string? link, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get offers for user (paged)
+        /// </summary>
+        /// <remarks>
+        /// Retrieves offers by pages applying filters (name or group id)
+        /// </remarks>
+        /// <param name="name">Offer name</param>
+        /// <param name="groupId">Offer group id</param>
+        /// <param name="userId">User id</param>
+        /// <param name="pageSize">Page size (from 1 to 50, default 20)</param>
+        /// <param name="dir">Direction of paging</param>
+        /// <param name="pageToken">Current position token (from previous page response)</param>
+        /// <returns>Returns offers list</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<OfferPagingResponse>> OfferGetAsync(string? name = null, System.Guid? groupId = null, string? userId = null, int? pageSize = null, EnPageDirection? dir = null, string? pageToken = null, System.Collections.Generic.IEnumerable<string>? includedProperties = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Create new offer
+        /// </summary>
+        /// <param name="input">Offer to add</param>
+        /// <returns>Returns the newly created offer id</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<ResultGuid>> OfferPostAsync(OfferPost input, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial interface IPurchaseClient
+    {
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Create shopping cart
+        /// </summary>
+        /// <remarks>
+        /// Create shopping cart with cart items. At the same time, the cart items are synchronized with the platform
+        /// </remarks>
+        /// <param name="shoppingCart">Shopping cart data</param>
+        /// <returns>Returns created shopping cart</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<ShoppingCart>> CartAsync(ShoppingCartPost shoppingCart, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Create purchase
+        /// </summary>
+        /// <remarks>
+        /// Create purchase from shopping cart
+        /// </remarks>
+        /// <param name="purchasePost">Purchase data</param>
+        /// <returns>Returns created purchase id</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<ShoppingCart>> PurchasePostAsync(PurchasePost purchasePost, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <summary>
+        /// Get purchase by id
+        /// </summary>
+        /// <remarks>
+        /// Retrieves purchase by unique id
+        /// </remarks>
+        /// <param name="id">Id of purchase</param>
+        /// <returns>Returns purchase</returns>
+        /// <exception cref="MulticartApiClientException">A server side error occurred.</exception>
+        System.Threading.Tasks.Task<MulticartClientResponse<PurchaseGet>> PurchaseGetAsync(System.Guid id, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken));
 
     }
 
@@ -337,7 +407,7 @@ namespace Cle.MulticartApi.Client.Types
         private string? _smallImageUrl = default!;
         private System.Collections.Generic.ICollection<Variant>? _variants = default!;
         private System.Collections.Generic.ICollection<VariantCategory>? _variantCategories = default!;
-        private PriceData? _priceInfo = default!;
+        private PriceData? _priceData = default!;
         private bool? _available = default!;
         private EnPlatformType? _platform = default!;
         private string? _platformData = default!;
@@ -560,18 +630,18 @@ namespace Cle.MulticartApi.Client.Types
         /// "Product price data"
         /// </summary>
 
-        [System.Text.Json.Serialization.JsonPropertyName("priceInfo")]
+        [System.Text.Json.Serialization.JsonPropertyName("priceData")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public PriceData? PriceInfo
+        public PriceData? PriceData
         {
-            get { return _priceInfo; }
+            get { return _priceData; }
 
             set
             {
-                if (_priceInfo != value)
+                if (_priceData != value)
                 {
-                    _priceInfo = value;
+                    _priceData = value;
                     RaisePropertyChanged();
                 }
             }
@@ -1730,29 +1800,92 @@ namespace Cle.MulticartApi.Client.Types
         [System.Runtime.Serialization.EnumMember(Value = @"Tyler")]
         Tyler = 138,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"Saksfifthavenue")]
+        Saksfifthavenue = 139,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Venus")]
+        Venus = 140,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"OnlineShoes")]
+        OnlineShoes = 141,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Lee")]
+        Lee = 142,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"CampMan")]
+        CampMan = 143,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"BlackDiamond")]
+        BlackDiamond = 144,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Fabulousfurs")]
+        Fabulousfurs = 145,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Fragrancenet")]
+        Fragrancenet = 146,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Belk")]
+        Belk = 147,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Sears")]
+        Sears = 148,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Reebok")]
+        Reebok = 149,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"DrJays")]
+        DrJays = 150,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Burberry")]
+        Burberry = 151,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Timberland")]
+        Timberland = 152,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LLBean")]
+        LLBean = 153,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Kmart")]
+        Kmart = 154,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"LittleBoyChic")]
+        LittleBoyChic = 155,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"NaturesJewelry")]
+        NaturesJewelry = 156,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Converse")]
+        Converse = 157,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Zara")]
+        Zara = 158,
+
         [System.Runtime.Serialization.EnumMember(Value = @"ShopifyApp")]
-        ShopifyApp = 139,
+        ShopifyApp = 159,
 
         [System.Runtime.Serialization.EnumMember(Value = @"WooCommerceApp")]
-        WooCommerceApp = 140,
+        WooCommerceApp = 160,
 
         [System.Runtime.Serialization.EnumMember(Value = @"BigCommerceApp")]
-        BigCommerceApp = 141,
+        BigCommerceApp = 161,
 
         [System.Runtime.Serialization.EnumMember(Value = @"MagentoApp")]
-        MagentoApp = 142,
+        MagentoApp = 162,
 
         [System.Runtime.Serialization.EnumMember(Value = @"SquareSpaceApp")]
-        SquareSpaceApp = 143,
+        SquareSpaceApp = 163,
 
         [System.Runtime.Serialization.EnumMember(Value = @"WixApp")]
-        WixApp = 144,
+        WixApp = 164,
 
         [System.Runtime.Serialization.EnumMember(Value = @"PrestaShopApp")]
-        PrestaShopApp = 145,
+        PrestaShopApp = 165,
 
         [System.Runtime.Serialization.EnumMember(Value = @"ShopwareApp")]
-        ShopwareApp = 146,
+        ShopwareApp = 166,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"Unknown")]
+        Unknown = 167,
 
     }
 
@@ -1796,6 +1929,532 @@ namespace Cle.MulticartApi.Client.Types
     }
 
     /// <summary>
+    /// Cart item
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CartItemSync : CartItemGet
+    {
+        private int? _orderLimit = default!;
+        private int? _orderMinLimit = default!;
+        private bool? _shippable = default!;
+        private PlatformState? _platformState = default!;
+
+        /// <summary>
+        /// Order limit for cart item count
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("orderLimit")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public int? OrderLimit
+        {
+            get { return _orderLimit; }
+
+            set
+            {
+                if (_orderLimit != value)
+                {
+                    _orderLimit = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Order limit for cart item count minimum
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("orderMinLimit")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public int? OrderMinLimit
+        {
+            get { return _orderMinLimit; }
+
+            set
+            {
+                if (_orderMinLimit != value)
+                {
+                    _orderMinLimit = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cart item shippable
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("shippable")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? Shippable
+        {
+            get { return _shippable; }
+
+            set
+            {
+                if (_shippable != value)
+                {
+                    _shippable = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("platformState")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public PlatformState? PlatformState
+        {
+            get { return _platformState; }
+
+            set
+            {
+                if (_platformState != value)
+                {
+                    _platformState = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Shopping platform service state
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PlatformState : System.ComponentModel.INotifyPropertyChanged
+    {
+        private EnPlatformType? _platformType = default!;
+        private string? _state = default!;
+        private string? _serverRequest = default!;
+        private string? _clientResponse = default!;
+        private string? _step = default!;
+        private string? _type = default!;
+        private bool? _isCaptchaChallenge = default!;
+        private CaptchaChallengeOptions? _captchaChallengeOptions = default!;
+
+        /// <summary>
+        /// Platform type
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("platformType")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public EnPlatformType? PlatformType
+        {
+            get { return _platformType; }
+
+            set
+            {
+                if (_platformType != value)
+                {
+                    _platformType = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Platform state between sessions
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("state")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? State
+        {
+            get { return _state; }
+
+            set
+            {
+                if (_state != value)
+                {
+                    _state = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Request from shopping platform service (for example, if it needs some action from the user)
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("serverRequest")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? ServerRequest
+        {
+            get { return _serverRequest; }
+
+            set
+            {
+                if (_serverRequest != value)
+                {
+                    _serverRequest = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Response to shopping platform service (if ше needs a response from the user)
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("clientResponse")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? ClientResponse
+        {
+            get { return _clientResponse; }
+
+            set
+            {
+                if (_clientResponse != value)
+                {
+                    _clientResponse = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Current step of a platform service process
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("step")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Step
+        {
+            get { return _step; }
+
+            set
+            {
+                if (_step != value)
+                {
+                    _step = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Type of current platform state
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("type")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Type
+        {
+            get { return _type; }
+
+            set
+            {
+                if (_type != value)
+                {
+                    _type = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Captcha challenge
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("isCaptchaChallenge")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? IsCaptchaChallenge
+        {
+            get { return _isCaptchaChallenge; }
+
+            set
+            {
+                if (_isCaptchaChallenge != value)
+                {
+                    _isCaptchaChallenge = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Captcha challenge options
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("captchaChallengeOptions")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public CaptchaChallengeOptions? CaptchaChallengeOptions
+        {
+            get { return _captchaChallengeOptions; }
+
+            set
+            {
+                if (_captchaChallengeOptions != value)
+                {
+                    _captchaChallengeOptions = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CaptchaChallengeOptions : System.ComponentModel.INotifyPropertyChanged
+    {
+        private PerimetrXOptions? _perimetrXOptions = default!;
+        private CaptchaServiceType? _captchaServiceType = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("perimetrXOptions")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public PerimetrXOptions? PerimetrXOptions
+        {
+            get { return _perimetrXOptions; }
+
+            set
+            {
+                if (_perimetrXOptions != value)
+                {
+                    _perimetrXOptions = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("captchaServiceType")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public CaptchaServiceType? CaptchaServiceType
+        {
+            get { return _captchaServiceType; }
+
+            set
+            {
+                if (_captchaServiceType != value)
+                {
+                    _captchaServiceType = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PerimetrXOptions : System.ComponentModel.INotifyPropertyChanged
+    {
+        private string? _redirectUrl = default!;
+        private string? _appId = default!;
+        private string? _jsClientSrc = default!;
+        private bool? _firstPartyEnabled = default!;
+        private string? _vid = default!;
+        private string? _uuid = default!;
+        private string? _hostUrl = default!;
+        private string? _blockScript = default!;
+        private string? _host = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("redirectUrl")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? RedirectUrl
+        {
+            get { return _redirectUrl; }
+
+            set
+            {
+                if (_redirectUrl != value)
+                {
+                    _redirectUrl = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("appId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? AppId
+        {
+            get { return _appId; }
+
+            set
+            {
+                if (_appId != value)
+                {
+                    _appId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("jsClientSrc")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? JsClientSrc
+        {
+            get { return _jsClientSrc; }
+
+            set
+            {
+                if (_jsClientSrc != value)
+                {
+                    _jsClientSrc = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("firstPartyEnabled")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? FirstPartyEnabled
+        {
+            get { return _firstPartyEnabled; }
+
+            set
+            {
+                if (_firstPartyEnabled != value)
+                {
+                    _firstPartyEnabled = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("vid")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Vid
+        {
+            get { return _vid; }
+
+            set
+            {
+                if (_vid != value)
+                {
+                    _vid = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("uuid")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Uuid
+        {
+            get { return _uuid; }
+
+            set
+            {
+                if (_uuid != value)
+                {
+                    _uuid = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("hostUrl")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? HostUrl
+        {
+            get { return _hostUrl; }
+
+            set
+            {
+                if (_hostUrl != value)
+                {
+                    _hostUrl = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("blockScript")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? BlockScript
+        {
+            get { return _blockScript; }
+
+            set
+            {
+                if (_blockScript != value)
+                {
+                    _blockScript = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("host")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Host
+        {
+            get { return _host; }
+
+            set
+            {
+                if (_host != value)
+                {
+                    _host = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public enum CaptchaServiceType
+    {
+
+        [System.Runtime.Serialization.EnumMember(Value = @"PerimetrX")]
+        PerimetrX = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"HCaptcha")]
+        HCaptcha = 1,
+
+    }
+
+    /// <summary>
     /// Cart item list
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -1811,9 +2470,11 @@ namespace Cle.MulticartApi.Client.Types
     public partial class PagingResponseOfCartItemGet : System.ComponentModel.INotifyPropertyChanged
     {
         private System.Collections.Generic.ICollection<CartItemGet>? _data = default!;
+        private string? _prevPage = default!;
         private string? _nextPage = default!;
         private int? _pageSize = default!;
         private string? _nextPageToken = default!;
+        private string? _prevPageToken = default!;
 
         /// <summary>
         /// Paged data
@@ -1831,6 +2492,27 @@ namespace Cle.MulticartApi.Client.Types
                 if (_data != value)
                 {
                     _data = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Previous page relative url
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("prevPage")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? PrevPage
+        {
+            get { return _prevPage; }
+
+            set
+            {
+                if (_prevPage != value)
+                {
+                    _prevPage = value;
                     RaisePropertyChanged();
                 }
             }
@@ -1894,6 +2576,27 @@ namespace Cle.MulticartApi.Client.Types
                 if (_nextPageToken != value)
                 {
                     _nextPageToken = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Previous page token
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("prevPageToken")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? PrevPageToken
+        {
+            get { return _prevPageToken; }
+
+            set
+            {
+                if (_prevPageToken != value)
+                {
+                    _prevPageToken = value;
                     RaisePropertyChanged();
                 }
             }
@@ -1979,7 +2682,7 @@ namespace Cle.MulticartApi.Client.Types
         private string? _smallImageUrl = default!;
         private System.Collections.Generic.ICollection<Variant>? _variants = default!;
         private System.Collections.Generic.ICollection<VariantCategory>? _variantCategories = default!;
-        private PriceData? _priceInfo = default!;
+        private PriceData? _priceData = default!;
         private bool? _available = default!;
         private EnPlatformType? _platform = default!;
         private string? _platformData = default!;
@@ -2202,18 +2905,18 @@ namespace Cle.MulticartApi.Client.Types
         /// "Product price data"
         /// </summary>
 
-        [System.Text.Json.Serialization.JsonPropertyName("priceInfo")]
+        [System.Text.Json.Serialization.JsonPropertyName("priceData")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public PriceData? PriceInfo
+        public PriceData? PriceData
         {
-            get { return _priceInfo; }
+            get { return _priceData; }
 
             set
             {
-                if (_priceInfo != value)
+                if (_priceData != value)
                 {
-                    _priceInfo = value;
+                    _priceData = value;
                     RaisePropertyChanged();
                 }
             }
@@ -2384,6 +3087,65 @@ namespace Cle.MulticartApi.Client.Types
     }
 
     /// <summary>
+    /// Cart item
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CartItemGetAdmin : CartItemGet
+    {
+        private string? _userId = default!;
+
+        /// <summary>
+        /// Multicart owner user id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("userId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? UserId
+        {
+            get { return _userId; }
+
+            set
+            {
+                if (_userId != value)
+                {
+                    _userId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CartItemBodyAdmin : CartItemBody
+    {
+        private string? _userId = default!;
+
+        /// <summary>
+        /// Multicart owner user id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("userId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? UserId
+        {
+            get { return _userId; }
+
+            set
+            {
+                if (_userId != value)
+                {
+                    _userId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+    }
+
+    /// <summary>
     /// Multicart offer
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
@@ -2466,7 +3228,18 @@ namespace Cle.MulticartApi.Client.Types
     {
         private System.Guid? _groupId = default!;
         private string? _name = default!;
-        private OfferInfo? _offerInfo = default!;
+        private bool? _isActive = default!;
+        private Discount? _discount = default!;
+        private bool? _errorReported = default!;
+        private System.DateTimeOffset? _validUntil = default!;
+        private bool? _customLink = default!;
+        private string? _link = default!;
+        private System.Collections.Generic.ICollection<OfferLinkData>? _shareLinks = default!;
+        private System.Collections.Generic.ICollection<string>? _tags = default!;
+        private double? _commissionFee = default!;
+        private bool? _useGoogleAnalytics = default!;
+        private string? _googleTrackingId = default!;
+        private bool? _useExternalCheckout = default!;
 
         /// <summary>
         /// Offer group id
@@ -2511,70 +3284,42 @@ namespace Cle.MulticartApi.Client.Types
         }
 
         /// <summary>
-        /// Offer info
+        /// Offer is activated
         /// </summary>
 
-        [System.Text.Json.Serialization.JsonPropertyName("offerInfo")]
+        [System.Text.Json.Serialization.JsonPropertyName("isActive")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public OfferInfo? OfferInfo
+        public bool? IsActive
         {
-            get { return _offerInfo; }
+            get { return _isActive; }
 
             set
             {
-                if (_offerInfo != value)
+                if (_isActive != value)
                 {
-                    _offerInfo = value;
+                    _isActive = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    /// <summary>
-    /// Offer additional data
-    /// </summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class OfferInfo : System.ComponentModel.INotifyPropertyChanged
-    {
-        private DiscountCoupons? _discountCoupons = default!;
-        private bool? _errorReported = default!;
-        private System.DateTimeOffset? _validUntil = default!;
-        private bool? _customLink = default!;
-        private string? _link = default!;
-        private System.Collections.Generic.ICollection<OfferLinkData>? _shareLinks = default!;
-        private System.Collections.Generic.ICollection<string>? _tags = default!;
-        private double? _commissionFee = default!;
-        private bool? _useGoogleAnalytics = default!;
-        private string? _googleTrackingId = default!;
-        private bool? _useExternalCheckout = default!;
-
         /// <summary>
         /// Discount coupon info 
         /// </summary>
 
-        [System.Text.Json.Serialization.JsonPropertyName("discountCoupons")]
+        [System.Text.Json.Serialization.JsonPropertyName("discount")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public DiscountCoupons? DiscountCoupons
+        public Discount? Discount
         {
-            get { return _discountCoupons; }
+            get { return _discount; }
 
             set
             {
-                if (_discountCoupons != value)
+                if (_discount != value)
                 {
-                    _discountCoupons = value;
+                    _discount = value;
                     RaisePropertyChanged();
                 }
             }
@@ -2804,9 +3549,9 @@ namespace Cle.MulticartApi.Client.Types
     /// Discount coupons info
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DiscountCoupons : System.ComponentModel.INotifyPropertyChanged
+    public partial class Discount : System.ComponentModel.INotifyPropertyChanged
     {
-        private System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, DiscountCoupon>>? _coupons = default!;
+        private System.Collections.Generic.IDictionary<EnPlatformType, System.Collections.Generic.IDictionary<string, string>>? _coupons = default!;
 
         /// <summary>
         /// Dictionary by Platform guid key, then Dictionary by Seller key
@@ -2815,7 +3560,7 @@ namespace Cle.MulticartApi.Client.Types
         [System.Text.Json.Serialization.JsonPropertyName("coupons")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public System.Collections.Generic.IDictionary<string, System.Collections.Generic.IDictionary<string, DiscountCoupon>>? Coupons
+        public System.Collections.Generic.IDictionary<EnPlatformType, System.Collections.Generic.IDictionary<string, string>>? Coupons
         {
             get { return _coupons; }
 
@@ -2824,56 +3569,6 @@ namespace Cle.MulticartApi.Client.Types
                 if (_coupons != value)
                 {
                     _coupons = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
-
-        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null)
-                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class DiscountCoupon : System.ComponentModel.INotifyPropertyChanged
-    {
-        private string? _seller = default!;
-        private string? _coupon = default!;
-
-        [System.Text.Json.Serialization.JsonPropertyName("seller")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string? Seller
-        {
-            get { return _seller; }
-
-            set
-            {
-                if (_seller != value)
-                {
-                    _seller = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        [System.Text.Json.Serialization.JsonPropertyName("coupon")]
-
-        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string? Coupon
-        {
-            get { return _coupon; }
-
-            set
-            {
-                if (_coupon != value)
-                {
-                    _coupon = value;
                     RaisePropertyChanged();
                 }
             }
@@ -2962,9 +3657,11 @@ namespace Cle.MulticartApi.Client.Types
     public partial class PagingResponseOfOfferGet : System.ComponentModel.INotifyPropertyChanged
     {
         private System.Collections.Generic.ICollection<OfferGet>? _data = default!;
+        private string? _prevPage = default!;
         private string? _nextPage = default!;
         private int? _pageSize = default!;
         private string? _nextPageToken = default!;
+        private string? _prevPageToken = default!;
 
         /// <summary>
         /// Paged data
@@ -2982,6 +3679,27 @@ namespace Cle.MulticartApi.Client.Types
                 if (_data != value)
                 {
                     _data = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Previous page relative url
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("prevPage")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? PrevPage
+        {
+            get { return _prevPage; }
+
+            set
+            {
+                if (_prevPage != value)
+                {
+                    _prevPage = value;
                     RaisePropertyChanged();
                 }
             }
@@ -3045,6 +3763,27 @@ namespace Cle.MulticartApi.Client.Types
                 if (_nextPageToken != value)
                 {
                     _nextPageToken = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Previous page token
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("prevPageToken")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? PrevPageToken
+        {
+            get { return _prevPageToken; }
+
+            set
+            {
+                if (_prevPageToken != value)
+                {
+                    _prevPageToken = value;
                     RaisePropertyChanged();
                 }
             }
@@ -3308,7 +4047,18 @@ namespace Cle.MulticartApi.Client.Types
     {
         private System.Guid? _groupId = default!;
         private string? _name = default!;
-        private OfferInfo? _offerInfo = default!;
+        private bool? _isActive = default!;
+        private Discount? _discountCoupons = default!;
+        private bool? _errorReported = default!;
+        private System.DateTimeOffset? _validUntil = default!;
+        private bool? _customLink = default!;
+        private string? _link = default!;
+        private System.Collections.Generic.ICollection<OfferLinkData>? _shareLinks = default!;
+        private System.Collections.Generic.ICollection<string>? _tags = default!;
+        private double? _commissionFee = default!;
+        private bool? _useGoogleAnalytics = default!;
+        private string? _googleTrackingId = default!;
+        private bool? _useExternalCheckout = default!;
         private System.Collections.Generic.ICollection<CartItemPost>? _cartItems = default!;
 
         /// <summary>
@@ -3354,21 +4104,252 @@ namespace Cle.MulticartApi.Client.Types
         }
 
         /// <summary>
-        /// Offer info
+        /// Offer is activated
         /// </summary>
 
-        [System.Text.Json.Serialization.JsonPropertyName("offerInfo")]
+        [System.Text.Json.Serialization.JsonPropertyName("isActive")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public OfferInfo? OfferInfo
+        public bool? IsActive
         {
-            get { return _offerInfo; }
+            get { return _isActive; }
 
             set
             {
-                if (_offerInfo != value)
+                if (_isActive != value)
                 {
-                    _offerInfo = value;
+                    _isActive = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Discount coupon info 
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("discountCoupons")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public Discount? DiscountCoupons
+        {
+            get { return _discountCoupons; }
+
+            set
+            {
+                if (_discountCoupons != value)
+                {
+                    _discountCoupons = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer error notification flag
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("errorReported")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? ErrorReported
+        {
+            get { return _errorReported; }
+
+            set
+            {
+                if (_errorReported != value)
+                {
+                    _errorReported = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer lifetime. Maybe empty
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("validUntil")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.DateTimeOffset? ValidUntil
+        {
+            get { return _validUntil; }
+
+            set
+            {
+                if (_validUntil != value)
+                {
+                    _validUntil = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer use custom url as https://www.multicartshop.com/custom-url
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("customLink")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? CustomLink
+        {
+            get { return _customLink; }
+
+            set
+            {
+                if (_customLink != value)
+                {
+                    _customLink = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer custom url as https://www.multicartshop.com/custom-url
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("link")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Link
+        {
+            get { return _link; }
+
+            set
+            {
+                if (_link != value)
+                {
+                    _link = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer relationships with influencers 
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("shareLinks")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<OfferLinkData>? ShareLinks
+        {
+            get { return _shareLinks; }
+
+            set
+            {
+                if (_shareLinks != value)
+                {
+                    _shareLinks = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer tags
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("tags")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<string>? Tags
+        {
+            get { return _tags; }
+
+            set
+            {
+                if (_tags != value)
+                {
+                    _tags = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer brand commission fee
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("commissionFee")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public double? CommissionFee
+        {
+            get { return _commissionFee; }
+
+            set
+            {
+                if (_commissionFee != value)
+                {
+                    _commissionFee = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Use google analytics tracking for offer
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("useGoogleAnalytics")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? UseGoogleAnalytics
+        {
+            get { return _useGoogleAnalytics; }
+
+            set
+            {
+                if (_useGoogleAnalytics != value)
+                {
+                    _useGoogleAnalytics = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Google analitics tracking id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("googleTrackingId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? GoogleTrackingId
+        {
+            get { return _googleTrackingId; }
+
+            set
+            {
+                if (_googleTrackingId != value)
+                {
+                    _googleTrackingId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer using external link checkout flow
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("useExternalCheckout")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public bool? UseExternalCheckout
+        {
+            get { return _useExternalCheckout; }
+
+            set
+            {
+                if (_useExternalCheckout != value)
+                {
+                    _useExternalCheckout = value;
                     RaisePropertyChanged();
                 }
             }
@@ -3398,29 +4379,148 @@ namespace Cle.MulticartApi.Client.Types
     }
 
     /// <summary>
-    /// Cart item
+    /// Shopping cart
     /// </summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CartItemGetAdmin : CartItemGet
+    public partial class ShoppingCart : System.ComponentModel.INotifyPropertyChanged
     {
-        private string? _userId = default!;
+        private System.Collections.Generic.ICollection<ShoppingCartItem>? _cartItems = default!;
+        private System.Guid? _offerId = default!;
+        private string? _offerLink = default!;
+        private Discount? _discount = default!;
 
         /// <summary>
-        /// Multicart owner user id
+        /// Cart items
         /// </summary>
 
-        [System.Text.Json.Serialization.JsonPropertyName("userId")]
+        [System.Text.Json.Serialization.JsonPropertyName("cartItems")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string? UserId
+        public System.Collections.Generic.ICollection<ShoppingCartItem>? CartItems
         {
-            get { return _userId; }
+            get { return _cartItems; }
 
             set
             {
-                if (_userId != value)
+                if (_cartItems != value)
                 {
-                    _userId = value;
+                    _cartItems = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("offerId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? OfferId
+        {
+            get { return _offerId; }
+
+            set
+            {
+                if (_offerId != value)
+                {
+                    _offerId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer link
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("offerLink")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? OfferLink
+        {
+            get { return _offerLink; }
+
+            set
+            {
+                if (_offerLink != value)
+                {
+                    _offerLink = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Discount coupons
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("discount")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public Discount? Discount
+        {
+            get { return _discount; }
+
+            set
+            {
+                if (_discount != value)
+                {
+                    _discount = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Shopping cart item
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShoppingCartItem : CartItemSync
+    {
+        private int? _count = default!;
+        private string? _warning = default!;
+
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public int? Count
+        {
+            get { return _count; }
+
+            set
+            {
+                if (_count != value)
+                {
+                    _count = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        [System.Text.Json.Serialization.JsonPropertyName("warning")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Warning
+        {
+            get { return _warning; }
+
+            set
+            {
+                if (_warning != value)
+                {
+                    _warning = value;
                     RaisePropertyChanged();
                 }
             }
@@ -3429,31 +4529,987 @@ namespace Cle.MulticartApi.Client.Types
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
-    public partial class CartItemBodyAdmin : CartItemBody
+    public partial class ApiErrorOfShoppingCartErrorData : ApiError
     {
-        private string? _userId = default!;
+        private ShoppingCartErrorData? _errorData = default!;
 
-        /// <summary>
-        /// Multicart owner user id
-        /// </summary>
-
-        [System.Text.Json.Serialization.JsonPropertyName("userId")]
+        [System.Text.Json.Serialization.JsonPropertyName("errorData")]
 
         [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
-        public string? UserId
+        public ShoppingCartErrorData? ErrorData
         {
-            get { return _userId; }
+            get { return _errorData; }
 
             set
             {
-                if (_userId != value)
+                if (_errorData != value)
                 {
-                    _userId = value;
+                    _errorData = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
+    }
+
+    /// <summary>
+    /// Shopping cart error data
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShoppingCartErrorData : System.ComponentModel.INotifyPropertyChanged
+    {
+        private ShoppingCart? _cart = default!;
+        private System.Collections.Generic.ICollection<ShoppingCartProblem>? _problems = default!;
+
+        /// <summary>
+        /// Shopping cart
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cart")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public ShoppingCart? Cart
+        {
+            get { return _cart; }
+
+            set
+            {
+                if (_cart != value)
+                {
+                    _cart = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Problems list
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("problems")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<ShoppingCartProblem>? Problems
+        {
+            get { return _problems; }
+
+            set
+            {
+                if (_problems != value)
+                {
+                    _problems = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Shopping cart problem
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShoppingCartProblem : System.ComponentModel.INotifyPropertyChanged
+    {
+        private ShoppingCartItemPost? _cartItem = default!;
+        private ShoppingCartItem? _result = default!;
+        private string? _problem = default!;
+        private int? _code = default!;
+
+        /// <summary>
+        /// Cart item
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cartItem")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public ShoppingCartItemPost? CartItem
+        {
+            get { return _cartItem; }
+
+            set
+            {
+                if (_cartItem != value)
+                {
+                    _cartItem = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Result of platform request
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("result")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public ShoppingCartItem? Result
+        {
+            get { return _result; }
+
+            set
+            {
+                if (_result != value)
+                {
+                    _result = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Problem text
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("problem")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Problem
+        {
+            get { return _problem; }
+
+            set
+            {
+                if (_problem != value)
+                {
+                    _problem = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Problem code
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("code")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public int? Code
+        {
+            get { return _code; }
+
+            set
+            {
+                if (_code != value)
+                {
+                    _code = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Shopping cart item
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShoppingCartItemPost : System.ComponentModel.INotifyPropertyChanged
+    {
+        private System.Guid? _cartItemId = default!;
+        private System.Collections.Generic.ICollection<CartItemVariantSelect>? _variants = default!;
+        private int? _count = default!;
+        private PlatformState? _platformState = default!;
+
+        /// <summary>
+        /// Cart item id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cartItemId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? CartItemId
+        {
+            get { return _cartItemId; }
+
+            set
+            {
+                if (_cartItemId != value)
+                {
+                    _cartItemId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Product variants if exists
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("variants")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<CartItemVariantSelect>? Variants
+        {
+            get { return _variants; }
+
+            set
+            {
+                if (_variants != value)
+                {
+                    _variants = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Count of product
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public int? Count
+        {
+            get { return _count; }
+
+            set
+            {
+                if (_count != value)
+                {
+                    _count = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cart item platform state (if necessary)
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("platformState")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public PlatformState? PlatformState
+        {
+            get { return _platformState; }
+
+            set
+            {
+                if (_platformState != value)
+                {
+                    _platformState = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Cart item variant
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class CartItemVariantSelect : System.ComponentModel.INotifyPropertyChanged
+    {
+        private string? _categoryId = default!;
+        private string? _variantId = default!;
+
+        /// <summary>
+        /// Selected category id (if exists)
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("categoryId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? CategoryId
+        {
+            get { return _categoryId; }
+
+            set
+            {
+                if (_categoryId != value)
+                {
+                    _categoryId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Selected variant id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("variantId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? VariantId
+        {
+            get { return _variantId; }
+
+            set
+            {
+                if (_variantId != value)
+                {
+                    _variantId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Shopping cart
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class ShoppingCartPost : System.ComponentModel.INotifyPropertyChanged
+    {
+        private System.Collections.Generic.ICollection<ShoppingCartItemPost>? _cartItems = default!;
+        private string? _offerLink = default!;
+        private Discount? _discountCoupons = default!;
+
+        /// <summary>
+        /// Shopping cart items
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cartItems")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<ShoppingCartItemPost>? CartItems
+        {
+            get { return _cartItems; }
+
+            set
+            {
+                if (_cartItems != value)
+                {
+                    _cartItems = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer link
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("offerLink")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? OfferLink
+        {
+            get { return _offerLink; }
+
+            set
+            {
+                if (_offerLink != value)
+                {
+                    _offerLink = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Discount if exists
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("discountCoupons")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public Discount? DiscountCoupons
+        {
+            get { return _discountCoupons; }
+
+            set
+            {
+                if (_discountCoupons != value)
+                {
+                    _discountCoupons = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Purchase
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PurchasePost : System.ComponentModel.INotifyPropertyChanged
+    {
+        private ShoppingCart? _cart = default!;
+
+        /// <summary>
+        /// Shopping cart
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cart")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public ShoppingCart? Cart
+        {
+            get { return _cart; }
+
+            set
+            {
+                if (_cart != value)
+                {
+                    _cart = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Purchase
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PurchaseGet : PurchaseBody
+    {
+        private System.Collections.Generic.ICollection<PurchaseCartItemGet>? _cartItems = default!;
+
+        /// <summary>
+        /// Purchase cart items
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cartItems")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<PurchaseCartItemGet>? CartItems
+        {
+            get { return _cartItems; }
+
+            set
+            {
+                if (_cartItems != value)
+                {
+                    _cartItems = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+    }
+
+    /// <summary>
+    /// Purchase cart item
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public partial class PurchaseCartItemGet : System.ComponentModel.INotifyPropertyChanged
+    {
+        private System.Guid? _id = default!;
+        private System.Guid? _purchaseId = default!;
+        private System.Guid? _cartItemId = default!;
+        private long? _count = default!;
+        private EnPlatformType? _platform = default!;
+        private string? _seller = default!;
+        private string? _usItemId = default!;
+        private string? _productId = default!;
+        private string? _name = default!;
+        private string? _description = default!;
+        private string? _url = default!;
+        private System.Collections.Generic.ICollection<string>? _imagesUrls = default!;
+        private string? _smallImageUrl = default!;
+        private System.Collections.Generic.ICollection<Variant>? _variants = default!;
+        private System.Collections.Generic.ICollection<VariantCategory>? _variantCategories = default!;
+        private PriceData? _priceData = default!;
+
+        /// <summary>
+        /// Purchase cart item unique identifier
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? Id
+        {
+            get { return _id; }
+
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Purchase id
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("purchaseId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? PurchaseId
+        {
+            get { return _purchaseId; }
+
+            set
+            {
+                if (_purchaseId != value)
+                {
+                    _purchaseId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Source cart item unique identifier
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("cartItemId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? CartItemId
+        {
+            get { return _cartItemId; }
+
+            set
+            {
+                if (_cartItemId != value)
+                {
+                    _cartItemId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Cart item count
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("count")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public long? Count
+        {
+            get { return _count; }
+
+            set
+            {
+                if (_count != value)
+                {
+                    _count = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Target e-commerce platform name
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("platform")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+        public EnPlatformType? Platform
+        {
+            get { return _platform; }
+
+            set
+            {
+                if (_platform != value)
+                {
+                    _platform = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Seller host on target e-commerce platform
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("seller")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Seller
+        {
+            get { return _seller; }
+
+            set
+            {
+                if (_seller != value)
+                {
+                    _seller = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Unique item id on target e-commerce platform
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("usItemId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? UsItemId
+        {
+            get { return _usItemId; }
+
+            set
+            {
+                if (_usItemId != value)
+                {
+                    _usItemId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Product id on target e-commerce platform
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("productId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? ProductId
+        {
+            get { return _productId; }
+
+            set
+            {
+                if (_productId != value)
+                {
+                    _productId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Product name
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("name")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Name
+        {
+            get { return _name; }
+
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Product description 
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("description")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Description
+        {
+            get { return _description; }
+
+            set
+            {
+                if (_description != value)
+                {
+                    _description = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Url of product page on target e-commerce platform 
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("url")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? Url
+        {
+            get { return _url; }
+
+            set
+            {
+                if (_url != value)
+                {
+                    _url = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Urls of product images
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("imagesUrls")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<string>? ImagesUrls
+        {
+            get { return _imagesUrls; }
+
+            set
+            {
+                if (_imagesUrls != value)
+                {
+                    _imagesUrls = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Small image url to display on product thumb
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("smallImageUrl")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? SmallImageUrl
+        {
+            get { return _smallImageUrl; }
+
+            set
+            {
+                if (_smallImageUrl != value)
+                {
+                    _smallImageUrl = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// "Selected variants for target product"
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("variants")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<Variant>? Variants
+        {
+            get { return _variants; }
+
+            set
+            {
+                if (_variants != value)
+                {
+                    _variants = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// "Available variants for target product grouped by categories"
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("variantCategories")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Collections.Generic.ICollection<VariantCategory>? VariantCategories
+        {
+            get { return _variantCategories; }
+
+            set
+            {
+                if (_variantCategories != value)
+                {
+                    _variantCategories = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// "Product price data"
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("priceData")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public PriceData? PriceData
+        {
+            get { return _priceData; }
+
+            set
+            {
+                if (_priceData != value)
+                {
+                    _priceData = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
+    }
+
+    /// <summary>
+    /// Purchase
+    /// </summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.17.0.0 (NJsonSchema v10.8.0.0 (Newtonsoft.Json v13.0.0.0))")]
+    public abstract partial class PurchaseBody : System.ComponentModel.INotifyPropertyChanged
+    {
+        private System.Guid? _id = default!;
+        private System.Guid? _offerId = default!;
+        private Discount? _discount = default!;
+        private string? _offerLink = default!;
+
+        /// <summary>
+        /// Purchase unique identifier
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("id")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? Id
+        {
+            get { return _id; }
+
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer unique identifier
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("offerId")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public System.Guid? OfferId
+        {
+            get { return _offerId; }
+
+            set
+            {
+                if (_offerId != value)
+                {
+                    _offerId = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Purchase discount
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("discount")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public Discount? Discount
+        {
+            get { return _discount; }
+
+            set
+            {
+                if (_discount != value)
+                {
+                    _discount = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Offer link if exists
+        /// </summary>
+
+        [System.Text.Json.Serialization.JsonPropertyName("offerLink")]
+
+        [System.Text.Json.Serialization.JsonIgnore(Condition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingDefault)]   
+        public string? OfferLink
+        {
+            get { return _offerLink; }
+
+            set
+            {
+                if (_offerLink != value)
+                {
+                    _offerLink = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler? PropertyChanged;
+
+        protected virtual void RaisePropertyChanged([System.Runtime.CompilerServices.CallerMemberName] string? propertyName = null)
+        {
+            var handler = PropertyChanged;
+            if (handler != null)
+                handler(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        }
     }
 
 
