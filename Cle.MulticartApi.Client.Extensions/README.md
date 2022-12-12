@@ -7,13 +7,13 @@ Cle.MulticartApi.Client.Extensions is [available on NuGet](https://www.nuget.org
 console in Visual Studio to install it:
 
 ```pwsh
-Install-Package Cle.MulticartApi.Client.Extensions
+Install-Package Multicartshop.Client.Extensions
 ```
 
 If you're using .NET Core, you can use the `dotnet` command from your favorite shell:
 
 ```sh
-dotnet add package Cle.MulticartApi.Client.Extensions
+dotnet add package Multicartshop.Client.Extensions
 ```
 
 # 2. Using Cle.MulticartApi.Client.Extensions
